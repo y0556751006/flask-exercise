@@ -16,11 +16,11 @@ def test_mirror(client):
 
 
 def test_get_users(client):
-    res = client.get("/users")
+    res = client.get("/users/all")
     assert res.status_code == 200
 
     res_users = res.json["result"]["users"]
-    assert len(res_users) == 4
+    assert len(res_users) == 5
     assert res_users[0]["name"] == "Aria"
 
 
@@ -43,24 +43,24 @@ def test_get_user_id(client):
 
 
 def test_new_user(client):
-    res = client.post("/users", data={
+    user = {
         "name": "Ron",
         "age": 21,
         "team": "NNB"
-    })
-    assert res.status_code == 200
+    }
+    res = client.post("http://localhost:5000/users", json=user)
+    assert res.status_code == 201
 
 
 def test_update(client):
-    res = client.put("users/1", data={
-        "team": "C2TC"
-    })
+    data = {"team": "C2TC"}
+    res = client.put("/users/2", json=data)
     assert res.status_code == 200
 
-    res_user = res.json["result"]["user"]
-    assert res_user[1]["team"] == "C2TC"
+    res_user = res.json["result"]["Updated user"]
+    assert res_user["team"] == "C2TC"
 
 
 def test_delete(client):
-    res = client.delete("users/3")
+    res = client.delete("users/4")
     assert res.status_code == 200

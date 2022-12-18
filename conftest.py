@@ -1,7 +1,6 @@
 import pytest
 
-
-@pytest.fixture("session")
+@pytest.fixture
 def client():
     from app import app
 
