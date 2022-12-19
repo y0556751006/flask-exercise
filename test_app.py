@@ -62,5 +62,5 @@ def test_update(client):
 
 
 def test_delete(client):
-    res = client.delete("users/4")
+    res = client.delete("/users/4")
     assert res.status_code == 200
