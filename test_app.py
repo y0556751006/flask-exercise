@@ -1,5 +1,3 @@
-import pytest
-
 # pytest automatically injects fixtures
 # that are defined in conftest.py
 # in this case, client is injected
